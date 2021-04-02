@@ -1,1 +1,1 @@
-# HK-veebirakendused-2021
+# PHP kursus
