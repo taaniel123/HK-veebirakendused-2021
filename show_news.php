@@ -1,5 +1,6 @@
 <?php
 
+    require_once "usesession.php";
     require_once "../../../conf.php";
     error_reporting(E_ALL ^ E_NOTICE);
     function read_news() {
@@ -42,10 +43,13 @@
 <head>
     <meta charset="utf-8">
     <title>Veebirakendused ja nende loomine 2021</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+  <div class="header">
     <h1>Uudiste lugemine</h1>
     <p>See leht on valminud õppetöö raames!</p>
+  </div>
     <form name="form" action="" method="post">
     <label for="num">Mitut uudist soovite näha?</label><br>
     <input type="number" min="1" max="10" value="3" name="news_output_num">

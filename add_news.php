@@ -1,5 +1,6 @@
 <?php
 
+    require_once "usesession.php";
     require_once "../../../conf.php";
     $news_input_error = null;
     $news_title = null;
@@ -38,6 +39,7 @@
 <head>
     <meta charset="utf-8">
     <title>Veebirakendused ja nende loomine 2021</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
@@ -58,8 +60,10 @@ $data = htmlspecialchars($data);
 return $data;
 }
 ?>
+  <div class="header">
     <h1>Uudiste lisamine</h1>
     <p>See leht on valminud õppetöö raames!</p>
+  </div>
     <hr>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label for="news_title_input">Uudise pealkiri</label>
@@ -76,6 +80,6 @@ return $data;
         <br>
         <input type="submit" name="news_submit" value="Salvesta uudis">
     </form>
-    <p><?php echo $news_input_error; ?></p>
+    <p><center><?php echo $news_input_error; ?></center></p>
 </body>
 </html>

@@ -1,8 +1,9 @@
 <?php
+
   require_once "../../../conf.php";
   require_once "fnc_general.php";
   require_once "fnc_user.php";
-    
+
   $notice = null;
   $name = null;
   $surname = null;
@@ -13,7 +14,7 @@
   $birth_day = null;
   $birth_date = null;
   $month_names_et = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni","juuli", "august", "september", "oktoober", "november", "detsember"];
-  
+
   //muutujad võimalike veateadetega
   $name_error = null;
   $surname_error = null;
@@ -25,7 +26,8 @@
   $email_error = null;
   $password_error = null;
   $confirm_password_error = null;
-  
+  $user_exists_error = null;
+
   //kui on uue kasutaja loomise nuppu vajutatud
   if(isset($_POST["user_data_submit"])){
 	//kui on sisestatud nimi
@@ -34,13 +36,13 @@
 	} else {
 		$name_error = "Palun sisestage eesnimi!";
 	} //eesnime kontrolli lõpp
-	
+
 	if (isset($_POST["surname_input"]) and !empty($_POST["surname_input"])){
 		$surname = test_input($_POST["surname_input"]);
 	} else {
 		$surname_error = "Palun sisesta perekonnanimi!";
 	}
-	
+
 	if(isset($_POST["gender_input"])){
 	    $gender = intval($_POST["gender_input"]);
 	} else {
@@ -53,19 +55,19 @@
 	} else {
 		$birth_day_error = "Palun vali sünnikuupäev!";
 	}
-	
+
 	if(!empty($_POST["birth_month_input"])){
 		$birth_month = intval($_POST["birth_month_input"]);
 	} else {
 		$birth_month_error = "Palun vali sünnikuu!";
 	}
-	
+
 	if(!empty($_POST["birth_year_input"])){
 		$birth_year = intval($_POST["birth_year_input"]);
 	} else {
 		$birth_year_error = "Palun vali sünniaasta!";
 	}
-	
+
 	//kuupäeva valiidsus ehk reaalsuse kontroll
 	if(empty($birth_day_error) and empty($birth_month_error) and empty($birth_year_error)){
 		if(checkdate($birth_month, $birth_day, $birth_year)){
@@ -87,7 +89,7 @@
 	} else {
 		$email_error = "Palun sisesta e-postiaadress!";
 	}
-	
+
 	//parooli ehk salasõna kontroll
 	if(!empty($_POST["password_input"])){
 		if(strlen($_POST["password_input"])<8){
@@ -96,7 +98,7 @@
 	} else {
 		$password_error = "Palun sisestage salasõna!";
 	}
-	
+
 	if(empty($_POST["confirmpassword_input"])){
 		$confirm_password_error = "Palun sisestage salasõna kaks korda!";
 	} else {
@@ -104,9 +106,17 @@
 			$confirm_password_error = "Sisestatud salasõnad ei ole ühesugused!";
 		}
 	}
-	
+
+  // kontrollime, kas kasutaja on juba loodud
+   $conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
+   $select = "SELECT vr21_users_email FROM vr21_users WHERE vr21_users_email = '".$_POST['email']."'";
+   $result = $conn->query($select);
+   if($result->num_rows >= 1) {
+     $user_exists_error = "See kasutajanimi on juba võetud!";
+  }
+
 	//kui vigu pole, siis salvestame
-	if(empty($name_error) and empty($surname_error) and empty($birth_month_error) and empty($birth_year_error) and empty($birth_day_error)and empty($birth_date_error) and empty($gender_error) and empty($email_error) and empty($password_error) and empty($confirm_password_error)){
+	if(empty($name_error) and empty($surname_error) and empty($birth_month_error) and empty($birth_year_error) and empty($birth_day_error)and empty($birth_date_error) and empty($gender_error) and empty($email_error) and empty($password_error) and empty($confirm_password_error) and empty($user_exists_error)){
 		//salvestus ehk kasutaja loomine
 		$notice = sign_up($name, $surname, $gender, $birth_date, $email, $_POST["password_input"]);
 		if($notice == 1){
@@ -115,12 +125,12 @@
 			$notice = "Kasutaja loomisel tekkis tehniline tõrge!";
 		}
 	}
-	
-	
-	
+
+
+
   } //kui on nuppu vajutatud
-  
-  
+
+
 ?>
 
 <!DOCTYPE html>
@@ -128,24 +138,34 @@
   <head>
     <meta charset="utf-8">
 	<title>Veebirakendused ja nende loomine 2021</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+    <div class="header">
     <h1>Loo endale kasutajakonto</h1>
 	<p>See leht on valminud õppetöö raames!</p>
+</div>
 	<hr>
-	
+
 	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <div class="input-group">
 	  <label>Eesnimi:</label><br>
 	  <input name="first_name_input" type="text" value="<?php echo $name; ?>"><span><?php echo $name_error; ?></span><br>
-      <label>Perekonnanimi:</label><br>
+  </div>
+  <div class="input-group">
+    <label>Perekonnanimi:</label><br>
 	  <input name="surname_input" type="text" value="<?php echo $surname; ?>"><span><?php echo $surname_error; ?></span>
+  </div>
 	  <br>
-	  
+    <div class="input-group">
 	  <input type="radio" name="gender_input" value="2" <?php if($gender == "2"){echo " checked";} ?>><label>Naine</label>
+  </div>
+  <div class="input-group">
 	  <input type="radio" name="gender_input" value="1" <?php if($gender == "1"){echo " checked";} ?>><label>Mees</label><br>
+  </div>
 	  <span><?php echo $gender_error; ?></span>
 	  <br>
-	  
+    <div class="input-group">
 	  <label>Sünnikuupäev: </label>
 	  <?php
 	    //sünnikuupäev
@@ -186,17 +206,26 @@
 		}
 		echo "</select> \n";
 	  ?>
-
+  </div>
 	  <span><?php echo $birth_date_error ." " .$birth_day_error ." " .$birth_month_error ." " .$birth_year_error; ?></span>
-	  
+
 	  <br>
+    <div class="input-group">
 	  <label>E-mail (kasutajatunnus):</label><br>
 	  <input type="email" name="email" value="<?php echo $email; ?>"><span><?php echo $email_error; ?></span><br>
+  </div>
+  <div class="input-group">
 	  <label>Salasõna (min 8 tähemärki):</label><br>
 	  <input name="password_input" type="password"><span><?php echo $password_error; ?></span><br>
+  </div>
+  <div class="input-group">
 	  <label>Korrake salasõna:</label><br>
 	  <input name="confirmpassword_input" type="password"><span><?php echo $confirm_password_error; ?></span><br>
 	  <input name="user_data_submit" type="submit" value="Loo kasutaja"><span><?php echo $notice; ?></span>
+  </div>
+    <?php if ($user_exists_error) {
+      echo $user_exists_error;
+    }?>
 	</form>
 	<hr>
 	<p>Tagasi <a href="page.php">avalehele</a></p>

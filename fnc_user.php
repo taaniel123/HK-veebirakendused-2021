@@ -9,9 +9,9 @@ function sign_up($name, $surname, $gender, $birth_date, $email, $password){
     //$options = ["cost" => 12, "salt" => substr(sha1(rand()), 0, 22)];
     $options = ["cost" => 12];
     $pwd_hash = password_hash($password, PASSWORD_BCRYPT, $options);
-    
+
     $stmt -> bind_param("sssiss", $name, $surname, $birth_date, $gender, $email, $pwd_hash);
-    
+
     if($stmt -> execute()){
         $notice = 1;
     }
@@ -23,7 +23,7 @@ function sign_up($name, $surname, $gender, $birth_date, $email, $password){
     function sign_in($email, $password) {
         $notice = 0;
         $conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
-        $stmt = $conn -> prepare('SELECT vr21_users_id, vr21_users_firstname, vr21_users_lastname, vr_21_users_password FROM vr21_users WHERE vr21_users_email = ?');
+        $stmt = $conn -> prepare('SELECT vr21_users_id, vr21_users_firstname, vr21_users_lastname, vr21_users_password FROM vr21_users WHERE vr21_users_email = ?');
         echo $conn->error;
         $stmt -> bind_param('s', $email);
         $stmt -> bind_result($id_from_db, $first_name_from_db, $last_name_from_db, $password_from_db);
@@ -39,11 +39,12 @@ function sign_up($name, $surname, $gender, $birth_date, $email, $password){
                 $conn -> close();
                 header('Location: home.php');
                 exit();
-            }
+            }    
+        } else { // vale kasutaja või parool
+            $notice = " Kasutajanimi või parool on ebakorrektne!";
         }
 
         $stmt -> close();
         $conn -> close();
         return $notice;
     }
-

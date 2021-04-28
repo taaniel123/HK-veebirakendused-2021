@@ -1,13 +1,11 @@
 <?php
 
-	//session_start();
-	require("classes/SessionManager.class.php");
-	SessionManager::sessionStart("vr", 0, "/~taaniel.levin/", "tigu.hk.tlu.ee");
-	
+    require("classes/SessionManager.class.php");
+    SessionManager::sessionStart("vr", 0, "/~taaniel.levin/", "tigu.hk.tlu.ee");
+
 	require_once "../../../conf.php";
 	//require_once "fnc_general.php";
 	require_once "fnc_user.php";
-
     $myname ="Taaniel Levin";
     $weekdaydet = ["esmaspäev", "teisipäev", "kolmapäev", "neljapäev", "reede", "laupäev", "pühapäev"];
     $currenttime = date("d.m.Y H:i:s");
@@ -75,24 +73,23 @@
    if (isset($_POST['login_submit'])) {
        //kontrollime, kas email ja pw on olemas
        $notice = sign_in($_POST['email_input'], $_POST['password_input']);
-   }
+    }
 
 
 ?>
 <!DOCTYPE html>
 <html lang="et">
 <head>
-    <meta charset="utf-8">
-    <title>Veebirakendused ja nende loomine 2021</title>
+  <meta charset="utf-8">
+  <title>Veebirakendused ja nende loomine 2021</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>
-    <?php
-        echo $myname;
-    ?>
-    </h1>
-    <p>See leht on valminud õppetöö raames!</p>
-    <h2>Logi sisse</h2>
+  <div class="header">
+  <h1><p>Veebirakendused 2021</p></h1>
+  <p>See leht on valminud õppetöö raames!</p>
+    <h2><p style="color:black">Logi sisse</p></h2>
+    </div>
 	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<label>E-mail (kasutajatunnus):</label><br>
 		<input type="email" name="email_input" value="<?php echo $email; ?>"><span><?php echo $email_error; ?></span><br>
@@ -101,6 +98,7 @@
 		<input name="login_submit" type="submit" value="Logi sisse!"><span><?php echo $notice; ?></span>
 	</form>
     <p>Loo endale <a href="add_user.php">kasutajakonto!</a></p>
+		<p>Registreerunud kasutajatel on võimalus <a href="add_news.php">lisada uudiseid</a> ning <a href="show_news.php">neid lugeda.</a> Selleks tuleb sisse logida!</p>
     <?php
         echo $timehtml;
         echo $semesterdurhtml;
