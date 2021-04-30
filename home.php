@@ -26,6 +26,7 @@
 	<h3><p>Sinu IP aadress on <?php echo $_SESSION["IPaddress"]?></p></h3>
 	<h3><p><a href="add_news.php">Lisa mõni uudis</a> või <a href="show_news.php">loe neid.</a></h3></p>
 	<hr>
+	<h3><p><a href="upload_photo.php">Fotode üleslaadimine</a></p></h3>
 	<p><a href="?logout=1">Logi välja</a></p>
 </body>
 </html>
