@@ -80,6 +80,6 @@ return $data;
         <br>
         <input type="submit" name="news_submit" value="Salvesta uudis">
     </form>
-    <p><center><?php echo $news_input_error; ?></center></p>
+    <div class="errormessage"<p><center><?php echo $news_input_error; ?></p></div>
 </body>
 </html>

@@ -149,20 +149,17 @@
 
 	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <div class="input-group">
-	  <label>Eesnimi:</label><br>
+	  <label>Eesnimi:</label>
 	  <input name="first_name_input" type="text" value="<?php echo $name; ?>"><span><?php echo $name_error; ?></span><br>
   </div>
   <div class="input-group">
-    <label>Perekonnanimi:</label><br>
+    <label>Perekonnanimi:</label>
 	  <input name="surname_input" type="text" value="<?php echo $surname; ?>"><span><?php echo $surname_error; ?></span>
   </div>
 	  <br>
-    <div class="input-group">
 	  <input type="radio" name="gender_input" value="2" <?php if($gender == "2"){echo " checked";} ?>><label>Naine</label>
-  </div>
-  <div class="input-group">
+    <br>
 	  <input type="radio" name="gender_input" value="1" <?php if($gender == "1"){echo " checked";} ?>><label>Mees</label><br>
-  </div>
 	  <span><?php echo $gender_error; ?></span>
 	  <br>
     <div class="input-group">
@@ -211,17 +208,19 @@
 
 	  <br>
     <div class="input-group">
-	  <label>E-mail (kasutajatunnus):</label><br>
+	  <label>E-mail (kasutajatunnus):</label>
 	  <input type="email" name="email" value="<?php echo $email; ?>"><span><?php echo $email_error; ?></span><br>
   </div>
   <div class="input-group">
-	  <label>Salasõna (min 8 tähemärki):</label><br>
+	  <label>Salasõna (min 8 tähemärki):</label>
 	  <input name="password_input" type="password"><span><?php echo $password_error; ?></span><br>
   </div>
   <div class="input-group">
-	  <label>Korrake salasõna:</label><br>
+	  <label>Korrake salasõna:</label>
 	  <input name="confirmpassword_input" type="password"><span><?php echo $confirm_password_error; ?></span><br>
-	  <input name="user_data_submit" type="submit" value="Loo kasutaja"><span><?php echo $notice; ?></span>
+    <br>
+	  <input name="user_data_submit" type="submit" value="Loo kasutaja">
+    <div class="errormessage"><?php echo $notice; ?></div>
   </div>
     <?php if ($user_exists_error) {
       echo $user_exists_error;

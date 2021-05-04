@@ -39,7 +39,9 @@ function sign_up($name, $surname, $gender, $birth_date, $email, $password){
                 $conn -> close();
                 header('Location: home.php');
                 exit();
-            }    
+            } else {
+              $notice = " Kasutajanimi või parool on ebakorrektne!";
+            }
         } else { // vale kasutaja või parool
             $notice = " Kasutajanimi või parool on ebakorrektne!";
         }
