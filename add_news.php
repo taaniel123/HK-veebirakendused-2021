@@ -64,7 +64,6 @@ return $data;
     <h1>Uudiste lisamine</h1>
     <p>See leht on valminud õppetöö raames!</p>
   </div>
-    <hr>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label for="news_title_input">Uudise pealkiri</label>
         <br>

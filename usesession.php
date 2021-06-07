@@ -1,8 +1,7 @@
 <?php
-  require("classes/SessionManager.class.php");
+  require "classes/SessionManager.class.php";
   SessionManager::sessionStart("vr", 0, "/~taaniel.levin/", "tigu.hk.tlu.ee");
-  
-
+ 
   //kas on sisse loginud
   if(!isset($_SESSION["user_id"])){
 	//jõuga suunatakse sisselogimise lehele

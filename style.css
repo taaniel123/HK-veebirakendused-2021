@@ -10,12 +10,11 @@ body {
 .header {
   width: 30%;
   margin: 50px auto 0px;
-  color: white;
+  color: whitesmoke;
   background: #A05F62;
   text-align: center;
   border: 1px solid #A05F62;
-  border-bottom: none;
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 10px 10px;
   padding: 20px;
 }
 .errormessage {
@@ -58,4 +57,11 @@ form, .content {
   background: #dff0d8;
   border: 1px solid #3c763d;
   margin-bottom: 20px;
+}
+.gallery {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  margin: 2em;
 }
