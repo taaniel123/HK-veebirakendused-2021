@@ -83,6 +83,7 @@ if (isset($_POST["photo_submit"])) {
   <div class="header">
     <h1>Fotode üleslaadimine</h1>
     <p>See leht on valminud õppetöö raames!</p>
+    <script src="scripts/checkImageSize.js" defer></script>
   </div>
     <hr>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
@@ -109,9 +110,9 @@ if (isset($_POST["photo_submit"])) {
         <input id="make_thumbnail" name="make_thumbnail" type="radio">
         <br>
         <br>
-        <input type="submit" name="photo_submit" value="Lae pilt üles!">
+        <input type="submit" id="photo_submit" name="photo_submit" value="Lae pilt üles!">
     </form>
     <br>
-    <div class="errormessage"><p><?php echo $photo_upload_error; echo $notice ?></p></div>
+    <div class="errormessage"><p id="notice"><?php echo $photo_upload_error; echo $notice ?></p></div>
 </body>
 </html>
