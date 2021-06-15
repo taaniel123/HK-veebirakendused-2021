@@ -16,7 +16,7 @@
 <html lang="et">
 <head>
 	<meta charset="utf-8">
-	<title>Veebirakendused ja nende loomine 2021</title>
+	<title>Kodu</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>

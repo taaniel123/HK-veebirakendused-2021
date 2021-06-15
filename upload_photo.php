@@ -113,6 +113,8 @@ if (isset($_POST["photo_submit"])) {
         <input type="submit" id="photo_submit" name="photo_submit" value="Lae pilt üles!">
     </form>
     <br>
-    <div class="errormessage"><p id="notice"><?php echo $photo_upload_error; echo $notice ?></p></div>
+    <div class="errormessage"><p id="notice"><?php echo $photo_upload_error; echo $notice ?></p>
+    <p><a href="home.php">Avalehele</a></p>
+    </div>
 </body>
 </html>

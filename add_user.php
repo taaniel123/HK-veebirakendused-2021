@@ -137,7 +137,7 @@
 <html lang="et">
   <head>
     <meta charset="utf-8">
-	<title>Veebirakendused ja nende loomine 2021</title>
+	<title>Kasutajakonto loomine</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
@@ -227,7 +227,7 @@
     }?>
 	</form>
 	<hr>
-	<p>Tagasi <a href="page.php">avalehele</a></p>
+	<div class="errormessage"><p><a href="page.php">Avalehele</a></p></div>
     <hr>
   </body>
 </html>
